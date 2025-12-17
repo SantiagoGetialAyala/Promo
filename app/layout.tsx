@@ -6,10 +6,15 @@ export const metadata = {
   description: 'Una experiencia musical para los que sienten de más.',
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="es">
       <head>
+        {/* META PIXEL */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)
@@ -20,17 +25,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
+
             fbq('init', '1048557267405011');
             fbq('track', 'PageView');
 
-            // Evento innovador: Usuario interesado (se queda más de 10 seg)
+            // Usuario interesado (+10s)
             setTimeout(() => {
-              if(window.fbq) fbq('trackCustom', 'Deep_Engagement');
+              if (window.fbq) {
+                fbq('trackCustom', 'Deep_Engagement');
+              }
             }, 10000);
           `}
         </Script>
       </head>
-      <body className="antialiased bg-black">{children}</body>
+      <body className="antialiased bg-black">
+        {children}
+      </body>
     </html>
   )
 }
